@@ -9,6 +9,7 @@ USER ContainerAdministrator
 RUN FOR /f "tokens=*" %i IN ('busybox --list') DO mklink C:\busybox\%i.exe busybox.exe
 RUN setx /M PATH "C:\busybox;C:\curl\;%PATH%"
 RUN mklink /D C:\bin C:\busybox
-RUN mkdir C:\tmp
+RUN mkdir C:\tmp C:\etc
+COPY resolv.conf /etc/
 USER ContainerUser
 ENTRYPOINT ["cmd.exe", "/s", "/c"]
